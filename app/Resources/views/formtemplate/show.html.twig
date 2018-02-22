@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Formtemplate</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ formTemplate.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ formTemplate.name }}</td>
+            </tr>
+<tr>
+<th> Cantidad de preguntas </th>
+<td>{{formTemplate.questions.count }} </td>
+</tr>
+
+        </tbody>
+    </table>
+
+<div id="preguntas">
+<table>
+<tr>
+<th> Texto </th>
+<th> ayuda </th>
+</tr>
+{% for q in formTemplate.questions %}
+<tr>
+<td> {{q.text}} </td>
+<td> {{q.helptext}} </td>
+
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div id="addquestion">
+
+<p> A&ntilde;ade una pregunta </p>
+{{form_start(questionForm) }}
+
+          {{ form_widget(questionForm) }}
+
+
+<input type="submit" value="agregar" />
+
+{{form_end(questionForm)}}
+</div>
+    <ul>
+        <li>
+            <a href="{{ path('formtemplate_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('formtemplate_edit', { 'id': formTemplate.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
